@@ -1,0 +1,16 @@
+
+  - name: download filebeat
+    get_url: >
+      url=https://download.elastic.co/beats/filebeat/filebeat-1.0.0-beta4-x86_64.rpm
+      dest=/opt/filebeat-1.0.0-beta4-x84_64.rpm
+  
+  - name: install filebeat
+    shell: rpm -vi /opt/filebeat-1.0.0-beta4-x84_64.rpm
+    args:
+      creates: /etc/filebeat/filebeat.yml
+
+  - name: filebeat config
+    template:
+      src=filebeat.yml.j2
+      dest=/etc/filebeat/filebeat.yml
+    notify: filebeat service
