@@ -9,6 +9,9 @@
     args:
       creates: /etc/filebeat/filebeat.yml
 
+  - name: log file permissions
+    shell: "chmod a+r /var/log/*"
+
   - name: filebeat config
     template:
       src=filebeat.yml.j2
