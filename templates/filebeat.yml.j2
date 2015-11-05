@@ -4,17 +4,17 @@ filebeat:
       paths:
         - "/var/log/*.log"
         - /var/log/messages
-      type: log
+      type: syslog
 
       #fields:
       #  level: debug
       #  review: 1
 
-      encoding: utf-8
+      # encoding: utf-8
 
 output:
   logstash:
     enabled: true
     hosts:
-      - logstash.ipa.beenverified.com:5044
+      - {{logstash_dns}}:5044
     loadbalance: true
