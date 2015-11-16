@@ -10,13 +10,7 @@
       creates: /etc/filebeat/filebeat.yml
 
   - name: log file permissions
-    shell: "chmod a+r /var/log/*"
-
-  - name: cron restart filebeat
-    template: 
-      src=50filebeatrestart.j2
-      dest=/etc/cron.hourly/50filebeatrestart
-      mode=0755
+    shell: "chmod -R a+r /var/log/*"
 
   - name: filebeat config
     template:
