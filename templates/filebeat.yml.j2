@@ -3,15 +3,13 @@ filebeat:
     -
       paths:
         - "/var/log/*.log"
-        - "/var/log/*/*log"
+        - "/var/log/[nginx]*/*log"
         - /var/log/messages
       type: syslog
-
-      #fields:
-      #  level: debug
-      #  review: 1
-
-      # encoding: utf-8
+    -
+      paths:
+        - "/var/log/nginx/*"
+      type: nginx-access
 
 output:
   logstash:
