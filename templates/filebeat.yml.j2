@@ -3,7 +3,7 @@ filebeat:
     -
       paths:
         - "/var/log/*.log"
-        - "/var/log/[nginx]*/*log"
+        - "/var/log/[^nginx]*/*log"
         - /var/log/messages
       type: syslog
     -
