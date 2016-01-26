@@ -2,14 +2,60 @@ filebeat:
   prospectors:
     -
       paths:
-        - "/var/log/*.log"
+        - "/var/log/[^yum][^boot]*.log"
         - "/var/log/[^nginx]*/*log"
-        - /var/log/messages
+        - /var/log/maillog
       type: syslog
     -
       paths:
-        - "/var/log/nginx/*log"
+        - /var/log/boot.log
+      type: linux-boot
+    -
+      paths:
+        - /var/log/cron
+      type: linux-cron
+    -
+      paths:
+        - /var/log/yum.log
+      type: linux-yum
+    -
+      paths:
+        - /var/log/audit/audit.log
+      type: linux-audit
+    - 
+      paths:
+        - /var/log/messages
+      type: linux-messages
+    - 
+      paths:
+        - /var/log/secure
+      type: linux-secure
+    -
+      paths:
+        - "/var/log/nginx/*access.log"
       type: nginx-access
+    -
+      paths:
+        - "/var/log/nginx/*cache.log"
+      type: nginx-cache
+    -
+      paths:
+        - "/var/log/nginx/*error.log"
+      type: nginx-error
+    -
+      paths:
+        - /var/log/varnish/varnishncsa.log
+      type: varnish-access
+    -
+      paths:
+        - /var/log/httpd/*access_log
+      type: apache-access
+    -
+      paths:
+        - /var/log/httpd/*error_log
+      type: apache-error
+      
+    
 
 output:
   logstash:
